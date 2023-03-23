@@ -1,4 +1,6 @@
-﻿namespace TennisKata;
+﻿using System.Reflection.Metadata.Ecma335;
+
+namespace TennisKata;
 
 public class Game
 {
@@ -15,7 +17,7 @@ public class Game
 
     private Player server = new Player();
     private Player receiver = new Player();
-
+    public bool GameInProgress => !server.Winner && !receiver.Winner;
 
     private Game()
     {
@@ -30,10 +32,16 @@ public class Game
             {
                 if (CheckDeuce())
                 {
-                    server.ToggleAdvantage();
-                    if (receiver.Advantage) receiver.ToggleAdvantage();
+                    if (server.Advantage)
+                        server.AddPoint();
+                    else if (receiver.Advantage) receiver.ToggleAdvantage();
+                    else server.ToggleAdvantage();
+
+
+
                 }
-                server.AddPoint();
+                else
+                    server.AddPoint();
 
             }
 
@@ -41,13 +49,17 @@ public class Game
             {
                 if (CheckDeuce())
                 {
-                    receiver.ToggleAdvantage();
-                    if (server.Advantage) server.ToggleAdvantage();
+                    if (receiver.Advantage)
+                        receiver.AddPoint();
+                    else if (server.Advantage) server.ToggleAdvantage();
+                    else receiver.ToggleAdvantage();
+
                 }
-                receiver.AddPoint();
+                else
+                    receiver.AddPoint();
             }
 
-            if (server.Score == 3 && receiver.Score == 3)
+            if (server.Score == 3 && receiver.Score == 3 && !CheckDeuce())
             {
                 server.ToggleDeuce();
                 receiver.ToggleDeuce();

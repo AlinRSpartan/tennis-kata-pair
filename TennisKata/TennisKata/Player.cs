@@ -19,7 +19,7 @@ public class Player
         if(!Advantage) Score++;
         else Winner = true;
 
-        if (Score == 4 && !Deuce) Winner = true;
+        if (Score >= 4 && !Deuce) Winner = true;
 
 
     }
