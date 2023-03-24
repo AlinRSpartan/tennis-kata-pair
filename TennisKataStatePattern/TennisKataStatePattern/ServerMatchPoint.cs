@@ -11,7 +11,7 @@ public class ServerMatchPoint : IScoreState
 
         if(winner == "server")
         {
-            _game.serverScore++;
+            _game.serverScore=5;
             _game.State = _game.IsWon;
         }
         else if (++_game.receiverScore == _game.serverScore) 

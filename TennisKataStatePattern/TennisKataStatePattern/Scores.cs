@@ -4,4 +4,6 @@
     Fifteen,
     Thirty,
     Forty,
+    Advantage,
+    Win
 }
